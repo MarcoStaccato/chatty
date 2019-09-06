@@ -1,5 +1,6 @@
 package com.staccato.driver;
 
+import com.staccato.properties.Config;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -7,6 +8,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DriverFactory {
 
@@ -33,12 +36,14 @@ public class DriverFactory {
 
     private WebDriver getRemoteDriver() {
         try {
-            URL selenoid = new URL("http://localhost:4444/wd/hub");
+            String remoteDriver = Config.ENV.getDriverUrl();
+            URL selenoid = new URL(remoteDriver);
             ChromeOptions capabilities = new ChromeOptions();
             capabilities.setCapability("enableVNC", true);
             return new RemoteWebDriver(selenoid, capabilities);
         }catch(MalformedURLException e){
-            //do nothing YET
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Malformed URL");
+            e.printStackTrace();
         }
         return null;
     }

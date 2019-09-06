@@ -3,6 +3,7 @@ package com.staccato.cucumber.steps;
 import com.staccato.driver.DriverFactory;
 import com.staccato.pages.ChatPage;
 import com.staccato.pages.LoginPage;
+import com.staccato.properties.Config;
 import com.staccato.utils.Interactions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -17,7 +18,7 @@ public class SpammerSteps {
 
     @Given("I access {string}") //acting as @before annotation
     public void I_access_chat(String url) throws Throwable {
-        driver.get(url);
+        driver.get(Config.ENV.getTargetUrl());
     }
 
     @When("I log in as {string}")
