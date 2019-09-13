@@ -16,8 +16,8 @@ public class SpammerSteps {
 
     WebDriver driver = DriverFactory.getInstance().getDriver();
 
-    @Given("I access {string}") //acting as @before annotation
-    public void I_access_chat(String url) throws Throwable {
+    @Given("I access chat") //acting as @before annotation
+    public void I_access_chat() throws Throwable {
         driver.get(Config.ENV.getTargetUrl());
     }
 
